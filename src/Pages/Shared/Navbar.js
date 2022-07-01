@@ -21,7 +21,7 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <Link to='/'  href='' class="btn btn-ghost normal-case text-xl text-stone-900">JobTask</Link>
         </div>
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal p-0">
