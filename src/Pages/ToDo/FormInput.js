@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 
-const TodoCreator = ({ theme, todo, setTodo, clearInput, inputRef, isInputEmpty, preventSubmit }) => {
+const TodoCreator = ({ theme,addToDos, todo, setTodo, clearInput, inputRef, isInputEmpty, preventSubmit }) => {
     const classes = useStyles();
 
     return (

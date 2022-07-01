@@ -13,23 +13,8 @@ const theme = createMuiTheme({
 const Form = () => {
 
     const [ newTodo, setNewTodo ] = useState('');
-    const [ todos, setTodos ] = useState([
-        {
-            text: "Learn about React",
-            isCompleted: false,
-            isEditing: false
-        },
-        {
-            text: "Meet friend for lunch",
-            isCompleted: false,
-            isEditing: false
-        },
-        {
-            text: "Build really cool todo app",
-            isCompleted: false,
-            isEditing: false
-        }
-    ]);
+    const [addToDos, setAddToDos] = useState('');
+    const [ todos, setTodos ] = useState([]);
     const inputRef = useRef();
     const noteRef = useRef({});
     const [ isInputEmpty, setInputEmpty ] = useState(false)
@@ -43,20 +28,32 @@ const Form = () => {
     };
 
     const preventSubmit = e => {
-        if (e.key === 'Enter') {
+        if (e.keyCode === 13) {
             e.preventDefault();
         }
     };
 
     const addTodo = text => {
         if ( text !== '') {
-            const newTodos = [...todos, { text }]
+            // post 
+            fetch("http://localhost:5000/addtodo", {
+          method: "POST",
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({text}),
+        })
+          .then((res) => res.json())
+          .then((data) =>{
+            alert('Add a Text Successfully')
+            const newTodos = [...todos, { text, _id : data.insertedId }]
             setNewTodo('')
             setTodos(newTodos);
-        } else {
-            console.log('text', text)
-            setInputEmpty(true);
-        }
+        });
+    } else {
+        console.log('text', text)
+        setInputEmpty(true);
+    }
     };
 
     const removeTodo = inx => {
@@ -65,10 +62,27 @@ const Form = () => {
         setTodos(newArr)
     }
 
-    const completeTodo = inx => {
-        const newTodos = [...todos];
-        newTodos[inx].isCompleted = !newTodos[inx].isCompleted;
-        setTodos(newTodos);
+    const completeTodo = (inx, id) => {
+        // /todos/:_id put
+        console.log(todos[inx])
+        if(id){
+
+            fetch(`http://localhost:5000/addtodo/${id}`, {
+                    method:'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body:JSON.stringify({ isCompleted : !todos[inx].isCompleted})
+                })
+                .then(res=>res.json())
+                .then(data => {
+                   
+                    
+                    const newTodos = [...todos];
+                    newTodos[inx].isCompleted = !newTodos[inx].isCompleted;
+                    setTodos(newTodos);
+                })
+        }
     };
 
     const editTodo = inx => {
@@ -91,11 +105,20 @@ const Form = () => {
     const setTodo = todo => {
         setInputEmpty(false);
         setNewTodo(todo);
+        setAddToDos(todo)
     }
 
     useEffect(() => {
 
-    }, [todos])
+    }, [todos]);
+
+    useEffect(()=>{
+        fetch("http://localhost:5000/addtodo")
+        .then((res) => res.json())
+        .then((data) =>{
+          setTodos(data)
+        });
+    },[])
 
     return (
         <form onSubmit={handleSubmit} className="form m-5 ">
@@ -103,6 +126,7 @@ const Form = () => {
                 <TodoCreator
                     theme={theme}
                     todo={newTodo}
+                    addToDo={addToDos}
                     setTodo={setTodo}
                     clearInput={clearInput}
                     inputRef={inputRef}

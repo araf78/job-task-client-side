@@ -39,7 +39,7 @@ const TodoList = ({ theme, todos, completeTodo, editTodo, deleteTodo, saveTodo, 
         }
 
         setChecked(newChecked);
-        completeTodo(inx);
+        completeTodo(inx, value._id);
     };
 
 
