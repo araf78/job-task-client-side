@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles({
     root: {
-        background: 'linear-gradient(45deg, gray 30%, black 90%)',
+        background: 'linear-gradient(45deg, goldenRod 2%, black 90%)',
         border: 0,
         color: 'white',
         height: 30,
@@ -29,6 +29,7 @@ const TodoCreator = ({ theme,addToDos, todo, setTodo, clearInput, inputRef, isIn
             <ThemeProvider theme={theme}>
                 <FormControl   className={classes.label}>
                     <TextField
+                    className='bg-stone-100'
                         id="outlined-basic"
                         label="What's need to be done?" // better accessibility with Material UI
                         value={todo}

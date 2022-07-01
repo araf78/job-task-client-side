@@ -59,7 +59,7 @@ const TodoList = ({ theme, todos, completeTodo, editTodo, deleteTodo, saveTodo, 
                     >
                         <ListItemIcon>
                             <Checkbox
-                                color="primary"
+                                className='border-green-200'
                                 edge="start"
                                 checked={checked.indexOf(todo) !== -1}
                                 tabIndex={-1}
@@ -103,7 +103,7 @@ const TodoList = ({ theme, todos, completeTodo, editTodo, deleteTodo, saveTodo, 
                                         id="task"
                                     />
                                     <ListItemIcon>
-                                        <IconButton onClick={() => saveTodo(inx)} edge="end" aria-label="delete">
+                                        <IconButton onClick={() => saveTodo(inx)} className='text-red-700' edge="end" aria-label="delete">
                                             <BookmarkIcon />
                                         </IconButton>
                                     </ListItemIcon>

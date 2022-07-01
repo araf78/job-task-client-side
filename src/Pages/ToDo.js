@@ -5,7 +5,8 @@ const useStyles = makeStyles(() => ({
   root: {
       width: '100%',
       backgroundColor: '#f5f5f5',
-      padding: 0
+      marginLeft: 100,
+      marginTop: 20,
   },
   li: {
       borderBottom: '1px dashed black'
@@ -50,12 +51,7 @@ const ToDo = () => {
                                     >
                                         {todo.text}
                                     </label>
-                                    <input
-                                        className="form__edit-input"
-                                        defaultValue={todo.text}
-                                       
-                                        id="task"
-                                    />
+                                  
                                   
                                 </>
                         }

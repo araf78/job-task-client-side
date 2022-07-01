@@ -2,6 +2,7 @@ import  React, { useState, useEffect, useRef } from 'react';
 import TodoCreator from "./FormInput";
 import TodoList from "./List";
 import { createMuiTheme } from "@material-ui/core/styles";
+import { toast } from 'react-toastify';
 
 
 const theme = createMuiTheme({
@@ -56,7 +57,15 @@ const Form = () => {
     }
     };
 
-    const removeTodo = inx => {
+    const removeTodo = (inx, id) => {
+        fetch(`http://localhost:5000/addtodo/${id}`, {
+                    method:'DELETE',
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(data => console.log(data))
         const newArr = [...todos]
         newArr.splice(inx, 1)
         setTodos(newArr)
@@ -134,7 +143,7 @@ const Form = () => {
                     preventSubmit={preventSubmit}
                 />
 
-                <TodoList
+                <TodoList className='bg-slate-800'
                     theme={theme}
                     todos={todos}
                     completeTodo={completeTodo}

@@ -6,6 +6,8 @@ import Calender from "./Pages/Calender";
 import ToDo from "./Pages/ToDo";
 import Form from "./Pages/ToDo/Form";
 import CompletedTasks from "./Pages/CompletedTasks";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   
@@ -19,6 +21,7 @@ function App() {
         <Route path="/form" element={<Form />} />
        <Route path="/calender" element={<Calender></Calender>}></Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
