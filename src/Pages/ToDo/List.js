@@ -103,14 +103,14 @@ const TodoList = ({ theme, todos, completeTodo, editTodo, deleteTodo, saveTodo, 
                                         id="task"
                                     />
                                     <ListItemIcon>
-                                        <IconButton onClick={() => saveTodo(inx)} className='text-red-700' edge="end" aria-label="delete">
+                                        <IconButton onClick={() => saveTodo(inx, todo._id)} className='text-red-700' edge="end" aria-label="delete">
                                             <BookmarkIcon />
                                         </IconButton>
                                     </ListItemIcon>
                                 </>
                         }
                         <ListItemSecondaryAction>
-                            <IconButton onClick={() => deleteTodo(inx)} edge="end" aria-label="delete">
+                            <IconButton onClick={() => deleteTodo(inx, todo._id)} edge="end" aria-label="delete">
                                 <DeleteIcon />
                             </IconButton>
                         </ListItemSecondaryAction>

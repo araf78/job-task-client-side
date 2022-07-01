@@ -95,16 +95,32 @@ const Form = () => {
     };
 
     const editTodo = inx => {
+
         const newTodos = [...todos];
         newTodos[inx].isEditing = !newTodos[inx].isEditing;
         setTodos(newTodos);
     }
 
-    const saveTodo = (inx) => {
-        const newTodos = [...todos];
-        newTodos[inx].isEditing = !newTodos[inx].isEditing;
-        newTodos[inx].text = noteRef.current[inx].value;
-        setTodos(newTodos);
+    const saveTodo = (inx, id) => {
+        if(id){
+
+            fetch(`http://localhost:5000/edit/${id}`, {
+                    method:'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body:JSON.stringify({ text : noteRef.current[inx].value})
+                })
+                .then(res=>res.json())
+                .then(data => {
+                   
+                    const newTodos = [...todos];
+                    newTodos[inx].isEditing = !newTodos[inx].isEditing;
+                    newTodos[inx].text = noteRef.current[inx].value;
+                    setTodos(newTodos);
+                            })
+        }
+        
     }
 
     const clearInput = () => {
