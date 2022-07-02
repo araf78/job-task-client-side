@@ -4,9 +4,12 @@ import React, { useEffect, useState } from 'react';
 const useStyles = makeStyles(() => ({
   root: {
       width: '100%',
-      backgroundColor: '#f5f5f5',
+      color: "#fafafa",
+      backgroundColor: '#263238',
       marginLeft: 100,
-      marginTop: 20,
+    borderRadius: "15px",
+    marginBottom: "15px",
+    marginTop: 20,
   },
   li: {
       borderBottom: '1px dashed black'
@@ -19,7 +22,7 @@ const ToDo = () => {
 
 
   useEffect(()=>{
-    fetch("http://localhost:5000/addtodo")
+    fetch("https://afternoon-lowlands-88961.herokuapp.com/addtodo")
     .then((res) => res.json())
     .then((data) =>{
       setTodos(data)

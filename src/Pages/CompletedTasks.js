@@ -4,12 +4,16 @@ import { List, ListItem, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#263238",
+    color: "#fafafa",
     marginLeft: 100,
+    borderRadius: "15px",
+    marginBottom: "15px",
     marginTop: 20,
+    marginRight: 20,
   },
   li: {
-    borderBottom: "1px dashed black",
+    borderBottom: "1px dashed #616161",
   },
 }));
 const CompletedTasks = () => {
@@ -17,7 +21,7 @@ const CompletedTasks = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    fetch("http://localhost:5000/completedtodos")
+    fetch("https://afternoon-lowlands-88961.herokuapp.com/completedtodos")
       .then((res) => res.json())
       .then((data) => {
         setTodos(data);
